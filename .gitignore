@@ -57,6 +57,9 @@ compile_commands.json
 *.bak
 *.swp
 
+# Visual Studio cache and temporary files
+.vs/
+
 # vcpkg
 vcpkg_installed/
 
@@ -66,3 +69,7 @@ vcpkg_installed/
 # test output & cache
 Testing/
 .cache/
+
+# Build output
+Debug/
+Release/
