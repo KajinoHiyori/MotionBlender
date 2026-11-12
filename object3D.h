@@ -40,9 +40,9 @@ public:
 
 	CObject3D(CObject3D::PRIORITY priority = CObject::PRIORITY_CYLINDER);
 	~CObject3D();
-	static CObject3D* Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXCOLOR col, float fWidth, float fDepth, TYPE type = CENTER_MIDDLE);
+	static CObject3D* Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXCOLOR col, float fWidth, float fDepth, float fRangeW, float fRangeD, TYPE type = CENTER_MIDDLE);
 	HRESULT Init(void) { return E_FAIL; }
-	HRESULT Init(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXCOLOR col, float fWidth, float fDepth, TYPE type = CENTER_MIDDLE);
+	HRESULT Init(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXCOLOR col, float fWidth, float fDepth, float fRangeW, float fRangeD, TYPE type = CENTER_MIDDLE);
 	void SetTextureIdx(int nIdx) { m_nIdxTexture = nIdx; }
 	void Uninit(void);
 	void Update(void);
@@ -64,6 +64,8 @@ private:
 	D3DXCOLOR m_col;	// 色
 	float m_fWidth;		// 横幅
 	float m_fDepth;		// 奥行き
+	float m_fTexRangeW;	// テクスチャ読み込み幅
+	float m_fTexRangeD;	// テクスチャ読み込み幅[奥行]
 	LPDIRECT3DVERTEXBUFFER9 m_pVtxBuff;		// 頂点バッファ
 	int m_nIdxTexture;		// テクスチャのインデックスを格納
 	D3DXMATRIX m_mtxWorld;	// ワールドマトリックス

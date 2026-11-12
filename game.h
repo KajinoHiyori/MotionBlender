@@ -23,6 +23,7 @@
 // 前方宣言
 //=============================
 class CPlayer;		// プレイヤークラス
+class CStage;		// ステージクラス
 
 //=============================
 // ゲームクラス
@@ -51,9 +52,11 @@ public:
 	void SetState(STATE state) { m_state = state; }
 	STATE GetState(void) { return m_state; }
 	static CPlayer* GetPlayer(void) { return m_pPlayer; }
+	static CStage* GetStage(void) { return m_pStage; }
 
 private:
 	static CPlayer* m_pPlayer;		// プレイヤークラスへのポインタ
+	static CStage* m_pStage;		// ステージクラスへのポインタ
 	STATE m_state;					// 状態管理
 };
 #endif

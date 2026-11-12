@@ -36,6 +36,8 @@ CObject3D::CObject3D(CObject3D::PRIORITY priority) : CObject(priority)
 	m_fDepth = 0.0f;		// 奥行き
 	m_pVtxBuff = NULL;		// 頂点バッファ	
 	m_nIdxTexture = 0;		// テクスチャのインデックス
+	m_fTexRangeW = 0.0f;	// テクスチャ読み込み幅
+	m_fTexRangeD = 0.0f;	// テクスチャ読み込み幅[奥行]
 }
 
 //=============================
@@ -49,7 +51,7 @@ CObject3D::~CObject3D()
 //=============================
 // 3Dポリゴン生成
 //=============================
-CObject3D* CObject3D::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXCOLOR col, float fWidth, float fDepth, TYPE type)
+CObject3D* CObject3D::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXCOLOR col, float fWidth, float fDepth, float fRangeW, float fRangeD, TYPE type)
 {
 	CObject3D* pObject3D = NULL;	// オブジェクトへのポインタを用意
 	if (pObject3D == NULL)
@@ -58,7 +60,7 @@ CObject3D* CObject3D::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXCOLOR col, fl
 		if (pObject3D != NULL)
 		{ // インスタンス生成に成功した場合
 			// 初期化処理
-			pObject3D->Init(pos, rot, col, fWidth, fDepth, type);
+			pObject3D->Init(pos, rot, col, fWidth, fDepth, fRangeW, fRangeD, type);
 			// 位置設定
 			pObject3D->SetPosition(pos);
 
@@ -72,7 +74,7 @@ CObject3D* CObject3D::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXCOLOR col, fl
 //=============================
 // 初期化処理
 //=============================
-HRESULT CObject3D::Init(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXCOLOR col, float fWidth, float fDepth, TYPE type)
+HRESULT CObject3D::Init(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXCOLOR col, float fWidth, float fDepth, float fRangeW, float fRangeD, TYPE type)
 {
 	// デバイスの取得
 	CRenderer* pRenderer = CManager::GetRenderer();
@@ -89,6 +91,8 @@ HRESULT CObject3D::Init(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXCOLOR col, float f
 	m_fDepth = fDepth;		// 奥行き
 	m_col = col;		// 色
 	m_type = type;
+	m_fTexRangeW = fRangeW;
+	m_fTexRangeD = fRangeD;
 
 	// 頂点バッファの生成
 	pDevice->CreateVertexBuffer(sizeof(VERTEX_3D) * NUM_VTX3D,	// 確保するバッファのサイズ
@@ -235,9 +239,9 @@ void CObject3D::SetVtx(void)
 
 	// テクスチャ座標の設定
 	pVtx[0].tex = D3DXVECTOR2(0.0f, 0.0f);
-	pVtx[1].tex = D3DXVECTOR2(1.0f, 0.0f);
-	pVtx[2].tex = D3DXVECTOR2(0.0f, 1.0f);
-	pVtx[3].tex = D3DXVECTOR2(1.0f, 1.0f);
+	pVtx[1].tex = D3DXVECTOR2(m_fTexRangeW, 0.0f);
+	pVtx[2].tex = D3DXVECTOR2(0.0f, m_fTexRangeD);
+	pVtx[3].tex = D3DXVECTOR2(m_fTexRangeW, m_fTexRangeD);
 
 	// 頂点バッファをアンロック
 	m_pVtxBuff->Unlock();

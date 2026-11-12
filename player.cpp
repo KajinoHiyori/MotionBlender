@@ -96,7 +96,7 @@ HRESULT CPlayer::Init(D3DXVECTOR3 pos, D3DXVECTOR3 rot)
 	// èâä˙âª
 	m_pos = pos;
 	m_posOld = pos;
-	m_move = D3DXVECTOR3(0.0f, 0.0f, m_fSpeed);
+	m_move = INIT_D3DVEC3;
 	m_rot = rot;
 	m_rotDest = rot;
 	// ÉÇÉfÉãì«Ç›çûÇ›
@@ -212,6 +212,7 @@ void CPlayer::Move(void)
 	// à⁄ìÆó ÇÃçXêV
 	m_move.x += (0.0f - m_move.x) * CORRECTION_MOVE;
 	m_move.y += (0.0f - m_move.y) * CORRECTION_MOVE;
+	m_move.z += (0.0f - m_move.z) * CORRECTION_MOVE;
 }
 
 //=============================

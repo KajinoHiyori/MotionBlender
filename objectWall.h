@@ -56,6 +56,7 @@ public:
 	D3DXVECTOR3 GetPosition(void) { return m_pos; }
 	D3DXVECTOR3 GetRotation(void) { return m_rot; }
 	D3DXCOLOR GetColor(void) { return m_col; }
+	void SetTecU(int nIdx, float fX, float fY);
 
 private:
 	void SetVtx(void);

@@ -52,6 +52,15 @@
     <Filter Include="object\no inheritance\h">
       <UniqueIdentifier>{0763b2b3-c1a6-433c-b8d2-a81b7994be42}</UniqueIdentifier>
     </Filter>
+    <Filter Include="event">
+      <UniqueIdentifier>{eb35093a-e872-4e5b-99d2-bb71df3d2da3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="event\cpp">
+      <UniqueIdentifier>{e17fcb84-90f8-41da-bb5a-d6e7be00470d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="event\h">
+      <UniqueIdentifier>{6422a73f-49cb-4c9e-973a-919556e1a2ce}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="camera.cpp">
@@ -120,11 +129,14 @@
     <ClCompile Include="renderer.cpp">
       <Filter>main\cpp</Filter>
     </ClCompile>
-    <ClCompile Include="player.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="polygon2D.cpp">
       <Filter>object\no inheritance\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="player.cpp">
+      <Filter>event\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="stage.cpp">
+      <Filter>event</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -197,11 +209,14 @@
     <ClInclude Include="renderer.h">
       <Filter>main\h</Filter>
     </ClInclude>
-    <ClInclude Include="player.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="polygon2D.h">
       <Filter>object\no inheritance\h</Filter>
+    </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>event\h</Filter>
+    </ClInclude>
+    <ClInclude Include="stage.h">
+      <Filter>event</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

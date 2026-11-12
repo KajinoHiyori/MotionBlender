@@ -29,19 +29,7 @@ public:
 	{
 		TYPE_NONE = 0,	// 初期化
 		TYPE_PLAYER,	// プレイヤー
-		TYPE_MACHINE,	// 機械
-		TYPE_FIELD,		// 地面
-		TYPE_BLOCK,		// ブロック
-		TYPE_WALL,		// 壁
-		TYPE_ITEM,	// アイテム
-		TYPE_STEM,	// 茎
-		TYPE_CORN,	// トウモロコシ
-		TYPE_POPCORN,	// ポップコーン
-		TYPE_TIMER,	// タイマー
-		TYPE_PAUSE,	// ポーズ
-		TYPE_SHADOW,	// 影
-		TYPE_EFFECT,	// エフェクト
-		TYPE_PARTICLE,	// パーティクル
+		TYPE_STAGE,	// 機械
 		TYPE_MAX
 	}TYPE;
 

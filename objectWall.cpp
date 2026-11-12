@@ -158,9 +158,6 @@ void CObjectWall::Draw(void)
 
 	D3DXMATRIX mtxRot, mtxTrans;	// 計算用マトリックス
 
-	// ライトをオフにする
-	pDevice->SetRenderState(D3DRS_LIGHTING, FALSE);
-
 	// テクスチャステージステートの設定
 	pDevice->SetTextureStageState(1, D3DTSS_COLOROP, D3DTOP_ADD);
 
@@ -193,9 +190,6 @@ void CObjectWall::Draw(void)
 	// ポリゴンの描画
 	pDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
 
-	// ライトをオンにする
-	pDevice->SetRenderState(D3DRS_LIGHTING, TRUE);
-
 	// テクスチャステージステートの初期化
 	pDevice->SetTextureStageState(0, D3DTSS_COLORARG1, D3DTA_TEXTURE);
 	pDevice->SetTextureStageState(0, D3DTSS_COLOROP, D3DTOP_MODULATE);
@@ -209,6 +203,19 @@ void CObjectWall::Draw(void)
 		pDevice->SetTextureStageState(1, D3DTSS_ALPHAOP, D3DTOP_DISABLE);
 		pDevice->SetTexture(1, NULL);
 	}
+}
+
+//=============================
+// 頂点情報の更新
+//=============================
+void CObjectWall::SetTecU(int nIdx, float fX, float fY)
+{
+	m_aTecU[nIdx][0] = D3DXVECTOR2(0.0f, 0.0f);
+	m_aTecU[nIdx][1] = D3DXVECTOR2(0.0f, fX);
+	m_aTecU[nIdx][2] = D3DXVECTOR2(fY, 0.0f);
+	m_aTecU[nIdx][3] = D3DXVECTOR2(fY, fX);
+
+	SetVtx();
 }
 
 //=============================
