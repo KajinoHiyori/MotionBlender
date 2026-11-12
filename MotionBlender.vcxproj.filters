@@ -5,13 +5,203 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="ヘッダー ファイル">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
     <Filter Include="リソース ファイル">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="main">
+      <UniqueIdentifier>{0c03cb1f-c98a-47cb-b898-30f3aef5e05e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\cpp">
+      <UniqueIdentifier>{ba6641ef-645f-4a46-8424-270fa5d71b2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main\h">
+      <UniqueIdentifier>{f63df6af-5c5e-4c00-8980-fa3e9d2908ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="object">
+      <UniqueIdentifier>{785d2d03-83da-4aef-81c0-894a1912e4fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scene">
+      <UniqueIdentifier>{6e3ad26c-c764-41a7-8497-35f08f6a89fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scene\cpp">
+      <UniqueIdentifier>{7db2c9ae-8619-4a9f-9890-62c90e300648}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scene\h">
+      <UniqueIdentifier>{d05582e9-0cdf-4694-9031-28a3d4d49e4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="object\inheritance">
+      <UniqueIdentifier>{dc473c86-2ccb-4476-8116-b19af631a88b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="object\inheritance\cpp">
+      <UniqueIdentifier>{f35f3b9b-bfc3-4442-9821-9897ad902f98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="object\inheritance\h">
+      <UniqueIdentifier>{52c9cec7-5cd3-4710-8e7c-bc4facf86599}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="object\no inheritance">
+      <UniqueIdentifier>{df51505f-494a-4357-863c-08e0e216341a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="object\no inheritance\cpp">
+      <UniqueIdentifier>{d8880df7-0ab1-41a2-9ca6-4c5887dd93bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="object\no inheritance\h">
+      <UniqueIdentifier>{0763b2b3-c1a6-433c-b8d2-a81b7994be42}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="camera.cpp">
+      <Filter>main\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="debugproc.cpp">
+      <Filter>main\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="fileX.cpp">
+      <Filter>main\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="input.cpp">
+      <Filter>main\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="light.cpp">
+      <Filter>main\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="loadscripts.cpp">
+      <Filter>main\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>main\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="manager.cpp">
+      <Filter>main\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="texture.cpp">
+      <Filter>main\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="game.cpp">
+      <Filter>scene\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="scene.cpp">
+      <Filter>scene\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="fade.cpp">
+      <Filter>scene\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="model.cpp">
+      <Filter>object\no inheritance\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="motion.cpp">
+      <Filter>object\no inheritance\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="object.cpp">
+      <Filter>object\inheritance\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="object2D.cpp">
+      <Filter>object\inheritance\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="object2DAnim.cpp">
+      <Filter>object\inheritance\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="object3D.cpp">
+      <Filter>object\inheritance\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="objectBillboard.cpp">
+      <Filter>object\inheritance\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="objectBillboardAnim.cpp">
+      <Filter>object\inheritance\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="objectWall.cpp">
+      <Filter>object\inheritance\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer.cpp">
+      <Filter>main\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="player.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="polygon2D.cpp">
+      <Filter>object\no inheritance\cpp</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="game.h">
+      <Filter>scene\h</Filter>
+    </ClInclude>
+    <ClInclude Include="fade.h">
+      <Filter>scene\h</Filter>
+    </ClInclude>
+    <ClInclude Include="scene.h">
+      <Filter>scene\h</Filter>
+    </ClInclude>
+    <ClInclude Include="camera.h">
+      <Filter>main\h</Filter>
+    </ClInclude>
+    <ClInclude Include="color.h">
+      <Filter>main\h</Filter>
+    </ClInclude>
+    <ClInclude Include="debugproc.h">
+      <Filter>main\h</Filter>
+    </ClInclude>
+    <ClInclude Include="fileX.h">
+      <Filter>main\h</Filter>
+    </ClInclude>
+    <ClInclude Include="input.h">
+      <Filter>main\h</Filter>
+    </ClInclude>
+    <ClInclude Include="light.h">
+      <Filter>main\h</Filter>
+    </ClInclude>
+    <ClInclude Include="loadscripts.h">
+      <Filter>main\h</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>main\h</Filter>
+    </ClInclude>
+    <ClInclude Include="manager.h">
+      <Filter>main\h</Filter>
+    </ClInclude>
+    <ClInclude Include="texture.h">
+      <Filter>main\h</Filter>
+    </ClInclude>
+    <ClInclude Include="model.h">
+      <Filter>object\no inheritance\h</Filter>
+    </ClInclude>
+    <ClInclude Include="motion.h">
+      <Filter>object\no inheritance\h</Filter>
+    </ClInclude>
+    <ClInclude Include="object.h">
+      <Filter>object\inheritance\h</Filter>
+    </ClInclude>
+    <ClInclude Include="object2D.h">
+      <Filter>object\inheritance\h</Filter>
+    </ClInclude>
+    <ClInclude Include="object2DAnim.h">
+      <Filter>object\inheritance\h</Filter>
+    </ClInclude>
+    <ClInclude Include="object3D.h">
+      <Filter>object\inheritance\h</Filter>
+    </ClInclude>
+    <ClInclude Include="objectBillboard.h">
+      <Filter>object\inheritance\h</Filter>
+    </ClInclude>
+    <ClInclude Include="objectBillboardAnim.h">
+      <Filter>object\inheritance\h</Filter>
+    </ClInclude>
+    <ClInclude Include="objectWall.h">
+      <Filter>object\inheritance\h</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer.h">
+      <Filter>main\h</Filter>
+    </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="polygon2D.h">
+      <Filter>object\no inheritance\h</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
