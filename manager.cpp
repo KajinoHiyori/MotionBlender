@@ -336,9 +336,6 @@ void CManager::Update(void)
 		m_pFade->Update();
 	}
 
-	// デバック表示
-	m_pDebugProc->Print("オブジェクト数 : %d\n", CObject::GetNumAll());
-
 	// レンダラー更新処理
 	m_pRenderer->Update();
 	

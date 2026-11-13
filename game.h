@@ -12,6 +12,7 @@
 //=============================
 #include "main.h"
 #include "manager.h"
+#include "motion_manager.h"
 
 //=============================
 // マクロ定義
@@ -53,10 +54,13 @@ public:
 	STATE GetState(void) { return m_state; }
 	static CPlayer* GetPlayer(void) { return m_pPlayer; }
 	static CStage* GetStage(void) { return m_pStage; }
+	static CMotionManager* GetMotionManager(void) { return m_pMotionManager; }
+	static CMotionManager::STATE GetMotionManagerState(void) { return m_pMotionManager->GetState(); }
 
 private:
 	static CPlayer* m_pPlayer;		// プレイヤークラスへのポインタ
 	static CStage* m_pStage;		// ステージクラスへのポインタ
+	static CMotionManager* m_pMotionManager;	// モーション管理
 	STATE m_state;					// 状態管理
 };
 #endif

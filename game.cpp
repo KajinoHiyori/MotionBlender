@@ -21,6 +21,7 @@
 //=============================
 CPlayer* CGame::m_pPlayer = NULL;	// プレイヤーへのポインタ
 CStage* CGame::m_pStage = NULL;		// ステージへのポインタ
+CMotionManager* CGame::m_pMotionManager = NULL;	// モーション管理へのポインタ
 
 //=============================
 // マクロ定義
@@ -60,6 +61,9 @@ HRESULT CGame::Init(void)
 	if (m_pStage != NULL)return E_FAIL;
 	m_pStage = CStage::Create(STAGE_SETTINGPATH);
 
+	// モーション管理
+	if (m_pMotionManager != NULL) return E_FAIL;
+	m_pMotionManager = CMotionManager::Create();
 	return S_OK;
 }
 
@@ -71,6 +75,7 @@ void CGame::Uninit(void)
 	// 各ポインタのクリア
 	m_pPlayer = NULL;	// プレイヤーへのポインタ
 	m_pStage = NULL;	// ステージへのポインタ
+	m_pMotionManager = NULL;	// モーション管理へのポインタ
 }
 
 //=============================

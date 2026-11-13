@@ -136,7 +136,10 @@
       <Filter>event\cpp</Filter>
     </ClCompile>
     <ClCompile Include="stage.cpp">
-      <Filter>event</Filter>
+      <Filter>event\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="motion_manager.cpp">
+      <Filter>event\cpp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -216,7 +219,10 @@
       <Filter>event\h</Filter>
     </ClInclude>
     <ClInclude Include="stage.h">
-      <Filter>event</Filter>
+      <Filter>event\h</Filter>
+    </ClInclude>
+    <ClInclude Include="motion_manager.h">
+      <Filter>event\h</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

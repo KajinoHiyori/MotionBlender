@@ -28,8 +28,9 @@ public:
 	typedef enum
 	{
 		TYPE_NONE = 0,	// 初期化
+		TYPE_STAGE,		// ステージ
 		TYPE_PLAYER,	// プレイヤー
-		TYPE_STAGE,	// 機械
+		TYPE_MOTION_MANAGER,	// モーション管理
 		TYPE_MAX
 	}TYPE;
 
@@ -37,6 +38,7 @@ public:
 	typedef enum
 	{
 		PRIORITY_SCENE = 0,		// シーンクラス
+		PRIORITY_MOTIONMANAGER,	// モーション管理
 		PRIORITY_FIELD,			// 地面
 		PRIORITY_EVENTS,		// イベント[item / obsculate]
 		PRIORITY_CHARACTOR,		// キャラクター

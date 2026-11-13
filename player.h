@@ -22,6 +22,7 @@
 // 前方宣言
 //=============================
 class CModel;	// モデルクラス
+class CStage;	// フィールドクラス
 
 //=============================
 // プレイヤークラス
@@ -94,7 +95,14 @@ public:
 	float GetSpeed(void) { return m_fSpeed; }
 
 private:
+	void UpdateGame(void);
+	void UpdateNormalUpdate(void);
+	void SpeedManager(void);
+	void JumpManager(void);
 	void Move(void);
+	void Jump(void);
+	void Setter(void);
+	void CollisionStage(CStage* pStage);
 	HRESULT LoadScripts(void);
 	bool LoadCharactor(void);
 	bool LoadModelFile(void);
@@ -112,6 +120,7 @@ private:
 	CMotion* m_apMotion[DIV_MOTION_MAX];		// モーション情報
 	char m_aFileName[MODEL_MAX][MAX_STRING];	// ローカルで文字列を格納[コピー]
 	float m_fSpeed;	// 移動速度
+	float m_fJump;	// ジャンプ量
 	bool m_bJump;	// ジャンプ
 };
 

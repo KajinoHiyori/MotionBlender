@@ -143,9 +143,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hInstancePrev, LPSTR lpCmdLine
 			if ((dwCurrentTime - dwExecLastTime) >= (1000 / 60))
 			{
 				dwExecLastTime = dwCurrentTime;	// 処理開始の時刻(現在時刻)を保存
-				
-				CDebugProc* pDebugProc = CManager::GetDebugProc();	// デバッグ表示の設定
-				pDebugProc->Print("FPS : %d\n", nCounterFPS);
 
 				// マネージャー更新処理
 				pManager->Update();

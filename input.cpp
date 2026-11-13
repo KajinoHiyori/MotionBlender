@@ -13,8 +13,8 @@
 //===============================
 // マクロ定義
 //===============================
-#define REPEAT_INTERVAL			(20)		// リピートに入るまでのの間隔
-#define TRIGGER_INTERVAL		(-15)		// トリガーからの間隔
+#define REPEAT_INTERVAL			(5)		// リピートに入るまでのの間隔
+#define TRIGGER_INTERVAL		(-10)		// トリガーからの間隔
 #define STICK_DEADZONE			(3000)		// デッドゾーン
 #define JOYSTICKVALUE_MAX		(32767)		// スティックの値の最大
 #define JOYSTICKVALUE_MIN		(-32768)	// スティックの値の最小
@@ -508,15 +508,6 @@ void CInputMouse::Update(void)
 		pDebugProc->Print("\nマウスのアクセスを喪失\n");
 		m_pDevice->Acquire();	// アクセス権取得
 	}
-
-	// マウスの位置
-	POINT mouse = { 0 };
-	GetCursorPos(&mouse);
-	pDebugProc->Print("スクリーン全体でのマウス座標 : %d, %d\n", mouse.x, mouse.y);
-
-	// クライアント領域でのマウス位置
-	D3DXVECTOR3 pos = GetClientPos();
-	pDebugProc->Print("クライアント領域でのマウス座標 : %.2f, %.2f\n", pos.x, pos.y);
 }
 
 //===============================

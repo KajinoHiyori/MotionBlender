@@ -10,7 +10,6 @@
 #include "camera.h"
 #include "input.h"
 #include "manager.h"
-#include "debugproc.h"
 #include "renderer.h"
 #include "game.h"
 #include "player.h"
@@ -110,12 +109,6 @@ void CCamera::Update(void)
 	{ // カメラの管理(キーボード)
 		UpdateOperate();
 	}
-
-	// デバッグ表示
-	CDebugProc* pDebugProc = CManager::GetDebugProc();
-	pDebugProc->Print("posV : (%.2f, %.2f, %.2f)\n", m_posV.x, m_posV.y, m_posV.z);
-	pDebugProc->Print("posR : (%.2f, %.2f, %.2f)\n", m_posR.x, m_posR.y, m_posR.z);
-	pDebugProc->Print("rot  : (%.2f, %.2f, %.2f)\n", m_rot.x, m_rot.y, m_rot.z);
 }
 
 //=============================
@@ -350,7 +343,6 @@ void CCamera::UpdateFollow(void)
 	m_posRDest.z = posPlayer.z + FORWARD;
 
 	CDebugProc* pDebug = CManager::GetDebugProc();
-	pDebug->Print("rotDest.y %f\n", m_rotDest.y);
 
 	// 視点情報更新
 	m_posR.x += (m_posRDest.x - m_posR.x) * CORRECTION_ROT;
