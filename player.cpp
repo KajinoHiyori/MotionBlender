@@ -25,14 +25,20 @@
 //=============================
 // マクロ定義
 //=============================
-#define NUM_DIVMOTION		(7)		// 分割時のモデル数
-#define BLEND_FRAME			(10)	// ブレンドモーションのフレーム数
-#define SPEED				(1.0f)	// 移動速度
-#define JUMP		(40.0f)	// ジャンプ
-#define CHANGE_X	(40.0f)	// X方向切り替え
-#define RADIUS		(45.0f)		// 半径
-#define HEIGHT		(117.0f)	// 身長
-#define MARGINE		(0.1f)		// 余白
+#define NUM_DIVMOTION	(7)		// 分割時のモデル数
+#define BLEND_FRAME		(10)	// ブレンドモーションのフレーム数
+#define SPEED			(1.0f)	// 移動速度
+#define JUMP			(40.0f)	// ジャンプ
+#define CHANGE_X		(40.0f)	// X方向切り替え
+#define RADIUS			(45.0f)		// 半径
+#define HEIGHT			(117.0f)	// 身長
+#define MARGINE			(0.1f)		// 余白
+#define SPEED_CHANGER	(0.05f)	// 移動量変更
+#define SPEED_MAX		(3.0f)	// 最高速度
+#define SPEED_MIN		(0.01f)	// 最低速度
+#define JUMP_CHANGER	(1.0f)	// ジャンプ量変更
+#define JUMP_MAX		(50.0f)	// 最高加速度
+#define JUMP_MIN		(10.0f)	// 最低加速度
 // ファイルパス
 #define SETTING_PATH		("data\\SCRIPTS\\player_setting.txt")	// プレイヤー設定情報
 #define UPPERMOTION_PATH	("data\\SCRIPTS\\player_uppermotion.txt")	// 上半身モーション
@@ -59,6 +65,7 @@ CPlayer::CPlayer(CObject::PRIORITY priority) : CObject(priority)
 	m_fSpeed = 0.0f;
 	m_fJump = 0.0f;
 	m_bJump = false;
+	m_updateType = DIV_MOTION_UNDER;
 }
 
 //=============================
@@ -212,8 +219,12 @@ void CPlayer::UpdateGame(void)
 
 	switch (pGame->GetMotionManagerState())
 	{
-	case CMotionManager::STATE_NORMALUPDATE:	// 通常処理
-		UpdateNormalUpdate();
+	case CMotionManager::MODE_STANDERD:	// 通常処理
+		UpdateStandard();
+		break;
+
+	case CMotionManager::MODE_KEY:	// キー更新処理
+		UpdateKey();
 		break;
 	}
 }
@@ -221,7 +232,7 @@ void CPlayer::UpdateGame(void)
 //=============================
 // STATE_NORMALUPDATE処理
 //=============================
-void CPlayer::UpdateNormalUpdate(void)
+void CPlayer::UpdateStandard(void)
 {
 	CGame* pGame = static_cast<CGame*>(CManager::GetScene());
 	
@@ -255,12 +266,38 @@ void CPlayer::UpdateNormalUpdate(void)
 	pDebug->Print("プレイヤーのジャンプ量[↑ / ↓] %f\n", m_fJump);
 }
 
-#define SPEED_CHANGER	(0.05f)	// 移動量変更
-#define SPEED_MAX		(3.0f)	// 最高速度
-#define SPEED_MIN		(0.01f)	// 最低速度
-#define JUMP_CHANGER	(1.0f)	// ジャンプ量変更
-#define JUMP_MAX		(50.0f)	// 最高加速度
-#define JUMP_MIN		(10.0f)	// 最低加速度
+//=============================
+// STATE_NORMALUPDATE処理
+//=============================
+void CPlayer::UpdateKey(void)
+{
+	CInputKeyboard* pKeyboard = CManager::GetInputKeyboard();
+	CGame* pGame = static_cast<CGame*>(CManager::GetScene());
+
+	// 更新するモーションを設定
+	SelectDivision();
+
+	// モーションの更新
+	if (pKeyboard->GetTrigger(DIK_RIGHTARROW) == true)
+	{ // キーを戻す
+		m_apMotion[m_updateType]->UpdateKey(true);
+	}
+	else if (pKeyboard->GetTrigger(DIK_LEFTARROW) == true)
+	{ // キーを進める
+		m_apMotion[m_updateType]->UpdateKey(false);
+	}
+	
+
+	// デバッグ表示
+	m_apMotion[m_updateType]->DrawDebugType1();
+
+	// 位置/角度更新処理
+	Setter();
+
+	// ステージとの判定
+	CollisionStage(pGame->GetStage());
+}
+
 //=============================
 // 速度管理処理
 //=============================
@@ -426,6 +463,26 @@ void CPlayer::Jump(void)
 	{
 		m_move.y = m_fJump;
 		m_bJump = true;
+	}
+}
+
+//=============================
+// 更新するモーションを設定
+//=============================
+void CPlayer::SelectDivision(void)
+{
+	if (CManager::GetInputKeyboard()->GetTrigger(DIK_TAB) == true)
+	{
+		switch (m_updateType)
+		{
+		case DIV_MOTION_UPPER:
+			m_updateType = DIV_MOTION_UNDER;
+			break;
+
+		case DIV_MOTION_UNDER:
+			m_updateType = DIV_MOTION_UPPER;
+			break;
+		}
 	}
 }
 

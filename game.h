@@ -55,7 +55,7 @@ public:
 	static CPlayer* GetPlayer(void) { return m_pPlayer; }
 	static CStage* GetStage(void) { return m_pStage; }
 	static CMotionManager* GetMotionManager(void) { return m_pMotionManager; }
-	static CMotionManager::STATE GetMotionManagerState(void) { return m_pMotionManager->GetState(); }
+	static CMotionManager::MODE GetMotionManagerState(void) { return m_pMotionManager->GetMode(); }
 
 private:
 	static CPlayer* m_pPlayer;		// プレイヤークラスへのポインタ

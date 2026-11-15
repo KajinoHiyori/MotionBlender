@@ -122,73 +122,6 @@ void CMotion::Set(int nType, int nFrameBlend)
 //=============================
 void CMotion::Update(void)
 {
-	CDebugProc* pDebug = CManager::GetDebugProc();
-	if (m_bMoveChanger == true)
-	{ // 移動時の更新処理
-		MoveUpdate();
-		//pDebug->Print("MoveUpdate======================================================\n");
-	}
-	else
-	{ // 通常時のモーション更新
-		NormalUpdate();
-		//pDebug->Print("NormalUpdate\n");
-	}
-	//pDebug->Print("腰 : %f, %f, %f\n", m_ppModel[0]->GetPosition().x, m_ppModel[0]->GetPosition().y, m_ppModel[0]->GetPosition().z);
-	//pDebug->Print("m_nType %d\n", m_nType);
-	//pDebug->Print("m_bLoop %d\n", m_bLoop);
-	//pDebug->Print("m_nNumKey %d\n", m_nNumKey);
-	//pDebug->Print("m_nKey %d\n", m_nKey);
-	//pDebug->Print("m_nCounter %d\n", m_nCounter);
-	//pDebug->Print("m_bFinish %d\n", m_bFinish);
-	//pDebug->Print("m_bBlend %d\n", m_bBlend);
-	//pDebug->Print("m_nTypeBlend %d\n", m_nTypeBlend);
-	//pDebug->Print("m_bLoopBlend %d\n", m_bLoopBlend);
-	//pDebug->Print("m_nNumKeyBlend %d\n", m_nNumKeyBlend);
-	//pDebug->Print("m_nKeyBlend %d\n", m_nKeyBlend);
-	//pDebug->Print("m_nCounterMotionBlend %d\n", m_nCounterMotionBlend);
-	//pDebug->Print("m_nFrameBlend %d\n", m_nFrameBlend);
-	//pDebug->Print("m_nCounterBlend %d\n", m_nCounterBlend);
-	//pDebug->Print("m_aInfo[%d].aKeyInfo[%d].nFrame %d\n", m_nType, m_nKey, m_aInfo[m_nType].aKeyInfo[m_nKey].nFrame);
-}
-
-//=============================
-// モーションのフレーム設定
-//=============================
-void CMotion::SetFrame(int nType, int nFrame)
-{
-	m_bFrameChanger = true;
-	m_nFrameChange = nFrame;
-	m_nFrameChangeType = nType;
-}
-
-//=============================
-// モーションのフレーム一括変更
-//=============================
-void CMotion::ChangeFrame(int nType, int nFrame)
-{ 
-	for (int nCntKey = 0; nCntKey < m_aInfo[nType].nNumKey; nCntKey++)
-	{
-		m_aInfo[nType].aKeyInfo[nCntKey].nFrame = nFrame;
-	}
-}
-
-//=============================
-// モーションのフレーム一括変更
-//=============================
-void CMotion::ChangeFrame(void)
-{
-	for (int nCntKey = 0; nCntKey < m_aInfo[m_nFrameChangeType].nNumKey; nCntKey++)
-	{
-		m_aInfo[m_nFrameChangeType].aKeyInfo[nCntKey].nFrame = m_nFrameChange;
-	}
-	m_bFrameChanger = false;
-}
-
-//=============================
-// 通常時の更新処理
-//=============================
-void CMotion::NormalUpdate(void)
-{
 	// 全モデル(パーツ)ごとに位置、向きを更新
 	for (int nCntModel = 0; nCntModel < m_nNumModel; nCntModel++)
 	{
@@ -288,8 +221,109 @@ void CMotion::NormalUpdate(void)
 			m_nKey = m_nKey % m_nNumKey;
 		}
 	}
+		
+	//CDebugProc* pDebug = CManager::GetDebugProc();
+	//pDebug->Print("NormalUpdate\n");
+	//pDebug->Print("腰 : %f, %f, %f\n", m_ppModel[0]->GetPosition().x, m_ppModel[0]->GetPosition().y, m_ppModel[0]->GetPosition().z);
+	//pDebug->Print("m_nType %d\n", m_nType);
+	//pDebug->Print("m_bLoop %d\n", m_bLoop);
+	//pDebug->Print("m_nNumKey %d\n", m_nNumKey);
+	//pDebug->Print("m_nKey %d\n", m_nKey);
+	//pDebug->Print("m_nCounter %d\n", m_nCounter);
+	//pDebug->Print("m_bFinish %d\n", m_bFinish);
+	//pDebug->Print("m_bBlend %d\n", m_bBlend);
+	//pDebug->Print("m_nTypeBlend %d\n", m_nTypeBlend);
+	//pDebug->Print("m_bLoopBlend %d\n", m_bLoopBlend);
+	//pDebug->Print("m_nNumKeyBlend %d\n", m_nNumKeyBlend);
+	//pDebug->Print("m_nKeyBlend %d\n", m_nKeyBlend);
+	//pDebug->Print("m_nCounterMotionBlend %d\n", m_nCounterMotionBlend);
+	//pDebug->Print("m_nFrameBlend %d\n", m_nFrameBlend);
+	//pDebug->Print("m_nCounterBlend %d\n", m_nCounterBlend);
+	//pDebug->Print("m_aInfo[%d].aKeyInfo[%d].nFrame %d\n", m_nType, m_nKey, m_aInfo[m_nType].aKeyInfo[m_nKey].nFrame);
 }
 
+//=============================
+// モーションの更新処理
+// 更新毎にキーが1進む
+//=============================
+void CMotion::UpdateKey(bool bType)
+{
+	// キーを加算
+	m_nCounter = 0;
+	if (bType == true)
+	{ // キーを進める
+		m_nKey++;
+	}
+	else
+	{ // キーを戻す
+		m_nKey--;
+		if (m_nKey < 0)
+		{
+			m_nKey = m_aInfo[m_nType].nNumKey - 1;
+		}
+	}
+
+	m_nKey = m_nKey % m_nNumKey;
+
+	// 全モデル(パーツ)ごとに位置、向きを更新
+	for (int nCntModel = 0; nCntModel < m_nNumModel; nCntModel++)
+	{
+		// モデルの位置を更新
+		D3DXVECTOR3 posOffset = m_ppModel[nCntModel]->GetPosOffset();
+		m_ppModel[nCntModel]->SetPosition(D3DXVECTOR3(m_aInfo[m_nType].aKeyInfo[m_nKey].aKey[nCntModel].fPosX + posOffset.x, m_aInfo[m_nType].aKeyInfo[m_nKey].aKey[nCntModel].fPosY + posOffset.y, m_aInfo[m_nType].aKeyInfo[m_nKey].aKey[nCntModel].fPosZ + posOffset.z));
+
+		// モデルの角度を更新
+		D3DXVECTOR3 rotOffset = m_ppModel[nCntModel]->GetRotOffset();
+		m_ppModel[nCntModel]->SetRotation(D3DXVECTOR3(m_aInfo[m_nType].aKeyInfo[m_nKey].aKey[nCntModel].fRotX + rotOffset.x, m_aInfo[m_nType].aKeyInfo[m_nKey].aKey[nCntModel].fRotY + rotOffset.y, m_aInfo[m_nType].aKeyInfo[m_nKey].aKey[nCntModel].fRotZ + rotOffset.z));
+	}
+}
+
+//=============================
+// モーションのフレーム設定
+//=============================
+void CMotion::SetFrame(int nType, int nFrame)
+{
+	m_bFrameChanger = true;
+	m_nFrameChange = nFrame;
+	m_nFrameChangeType = nType;
+}
+
+//=============================
+// モーションのフレーム一括変更
+//=============================
+void CMotion::ChangeFrame(int nType, int nFrame)
+{ 
+	for (int nCntKey = 0; nCntKey < m_aInfo[nType].nNumKey; nCntKey++)
+	{
+		m_aInfo[nType].aKeyInfo[nCntKey].nFrame = nFrame;
+	}
+}
+
+//=============================
+// デバッグ表示1
+//=============================
+void CMotion::DrawDebugType1(void)
+{
+	CDebugProc* pDebug = CManager::GetDebugProc();
+	pDebug->Print("m_nType %d\n", m_nType);
+	pDebug->Print("m_bLoop %d\n", m_bLoop);
+	pDebug->Print("m_nNumKey %d\n", m_nNumKey);
+	pDebug->Print("m_nKey %d\n", m_nKey);
+}
+
+//=============================
+// モーションのフレーム一括変更
+//=============================
+void CMotion::ChangeFrame(void)
+{
+	for (int nCntKey = 0; nCntKey < m_aInfo[m_nFrameChangeType].nNumKey; nCntKey++)
+	{
+		m_aInfo[m_nFrameChangeType].aKeyInfo[nCntKey].nFrame = m_nFrameChange;
+	}
+	m_bFrameChanger = false;
+}
+
+#if 0
 //=============================
 // 移動時の更新処理
 //=============================
@@ -439,6 +473,7 @@ void CMotion::MoveUpdate(void)
 
 #endif
 }
+#endif
 
 //=============================
 // ブレンドモーション位置更新

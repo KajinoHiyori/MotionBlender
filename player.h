@@ -93,14 +93,17 @@ public:
 	D3DXMATRIX GetMatrix(void) { return m_mtxWorld; }
 	void SetSpeed(float fSpeed) { m_fSpeed = fSpeed; }
 	float GetSpeed(void) { return m_fSpeed; }
+	DIV_MOTION GetMotionType(void) { return m_updateType; }
 
 private:
 	void UpdateGame(void);
-	void UpdateNormalUpdate(void);
+	void UpdateStandard(void);
+	void UpdateKey(void);
 	void SpeedManager(void);
 	void JumpManager(void);
 	void Move(void);
 	void Jump(void);
+	void SelectDivision(void);
 	void Setter(void);
 	void CollisionStage(CStage* pStage);
 	HRESULT LoadScripts(void);
@@ -122,6 +125,8 @@ private:
 	float m_fSpeed;	// 移動速度
 	float m_fJump;	// ジャンプ量
 	bool m_bJump;	// ジャンプ
+	//MotionBlender専用変数=====================
+	DIV_MOTION m_updateType;	// 現在更新するモーションの種類
 };
 
 #endif

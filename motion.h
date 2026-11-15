@@ -58,16 +58,16 @@ public:
 	void Set(int nType, bool bBlendMotion, int nFrameBlend);
 	void Set(int nType, int nFrameBlend);
 	void Update(void);
+	void UpdateKey(bool bType);
 	int GetType(void) { return m_nType; }
 	int GetBlendType(void) { return m_nTypeBlend; }
 	bool IsFinish(void) { return m_bFinish; }
 	void SetFrame(int nType, int nFrame);
 	void ChangeFrame(int nType, int nFrame);
+	void DrawDebugType1(void);
 
 private:
 	void ChangeFrame(void);
-	void NormalUpdate(void);
-	void MoveUpdate(void);
 	static float SetBlendPos(float fRate, float fNext, float fNow, float fRateBlend, float fNextBlend, float fNowBlend);
 	static float SetBlendRot(float fRate, float fNext, float fNow, float fRateBlend, float fNextBlend, float fNowBlend);
 	static float SetPos(float fRate, float fNext, float fNow);

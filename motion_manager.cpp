@@ -68,7 +68,7 @@ CMotionManager* CMotionManager::Create()
 HRESULT CMotionManager::Init()
 {
 	// 初期化
-	m_state = STATE_NORMALUPDATE;
+	m_mode = MODE_STANDERD;
 	return S_OK;
 }
 
@@ -85,12 +85,21 @@ void CMotionManager::Uninit(void)
 //=============================
 void CMotionManager::Update(void)
 {
+	// モード指定処理
+	SetMode();
+
 	CDebugProc* pDebug =  CManager::GetDebugProc();
-	switch (m_state)
+	switch (m_mode)
 	{
-	case STATE_NORMALUPDATE:	// 通常更新
+	case MODE_STANDERD:	// 通常更新
 		pDebug->Print("//=================================\n");
 		pDebug->Print("// 通常更新モード\n");
+		pDebug->Print("//=================================\n");
+		break;
+
+	case MODE_KEY:	// キーを更新
+		pDebug->Print("//=================================\n");
+		pDebug->Print("// キー更新モード\n");
 		pDebug->Print("//=================================\n");
 		break;
 	}
@@ -101,4 +110,23 @@ void CMotionManager::Update(void)
 //=============================
 void CMotionManager::Draw(void)
 {
+}
+
+//=============================
+// モード指定処理
+//=============================
+void CMotionManager::SetMode(void)
+{
+	CInputKeyboard* pKeyboard = CManager::GetInputKeyboard();
+
+	if (pKeyboard->GetTrigger(DIK_F1) == true)
+	{
+		m_mode = MODE_STANDERD;
+		return;
+	}
+	else if (pKeyboard->GetTrigger(DIK_F2) == true)
+	{
+		m_mode = MODE_KEY;
+		return;
+	}
 }

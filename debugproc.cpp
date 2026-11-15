@@ -77,12 +77,8 @@ void CDebugProc::Update(void)
 void CDebugProc::Draw(void)
 {
 	RECT rect = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
-
-	if (m_bDisp == true)
-	{
-		// テキストの描画
-		m_pFont->DrawText(NULL, &m_aStr[0], -1, &rect, DT_LEFT, D3DCOLOR_RGBA(255, 0, 0, 255));
-	}
+	// テキストの描画
+	m_pFont->DrawText(NULL, &m_aStr[0], -1, &rect, DT_LEFT, D3DCOLOR_RGBA(255, 0, 0, 255));
 	// デバッグ情報バッファのクリア
 	memset(&m_aStr[0], 0, sizeof m_aStr);
 }

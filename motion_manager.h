@@ -27,9 +27,10 @@ public:
 	// エディタの状態
 	typedef enum
 	{
-		STATE_NORMALUPDATE = 0,	// 全てのモーションが稼働
+		MODE_STANDERD = 0,	// 全てのモーションが稼働
+		MODE_KEY,		// キーを更新
 		STATE_MAX
-	}STATE;
+	}MODE;
 
 	CMotionManager(CObject::PRIORITY priority = CObject::PRIORITY_MOTIONMANAGER);
 	~CMotionManager();
@@ -39,10 +40,11 @@ public:
 	void Update(void);
 	void Draw(void);
 	void SetPosition(D3DXVECTOR3 pos) {}
-	STATE GetState(void) { return m_state; }
+	MODE GetMode(void) { return m_mode; }
 
 private:
-	STATE m_state;	// 現在のエディタの状態
+	void SetMode(void);
+	MODE m_mode;	// 現在のエディタの状態
 };
 
 #endif
